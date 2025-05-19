@@ -1,133 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>30-Day Advanced C++ + DSA Plan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9fafb;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 {
-      color: #1a73e8;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .reminder {
-      background-color: #fff4c1;
-      border-left: 6px solid #ffca28;
-      padding: 15px 20px;
-      border-radius: 6px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .reminder p {
-      margin: 6px 0;
-      font-weight: bold;
-    }
-    .plan-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-      gap: 20px;
-    }
-    .plan-day {
-      background: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: box-shadow 0.3s ease;
-    }
-    .plan-day:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .plan-day h2 {
-      margin-top: 0;
-      color: #1a73e8;
-    }
-    .topic {
-      margin: 6px 0;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      text-align: center;
-      color: #666;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>30-Day C++ + DSA Study Plan</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    background: #f0f8ff;
+  }
+  h1 {
+    text-align: center;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #aaa;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: #007acc;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background-color: #e6f2ff;
+  }
+  label {
+    cursor: pointer;
+  }
+  .footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #555;
+  }
+</style>
 </head>
 <body>
-  <h1>30-Day Advanced C++ + DSA Plan</h1>
 
-  <div id="today-reminder" class="reminder" style="display:none;">
-    <p>Today's Reminder (Day <span id="day-num"></span>):</p>
-    <ul>
-      <li><strong>DSA:</strong> <span id="dsa"></span></li>
-      <li><strong>Bjarne Book:</strong> <span id="bjarne"></span></li>
-      <li><strong>Cherno:</strong> <span id="cherno"></span></li>
-    </ul>
-  </div>
+<h1>30-Day C++ + DSA Study Plan</h1>
 
-  <div class="plan-grid" id="plan-container">
-    <!-- Days will be populated here -->
-  </div>
+<table id="plan-table">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Sharadha Mam DSA</th>
+      <th>Bjarne Book Reading</th>
+      <th>Cherno Playlist</th>
+      <th>Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Rows will be inserted here by JS -->
+  </tbody>
+</table>
 
-  <footer>
-    Made by Suhail Rana — 30-Day Plan to Master Advanced C++ and DSA
-  </footer>
+<div class="footer">
+  <button onclick="clearAttendance()">Clear Attendance</button>
+</div>
 
-  <script>
-    const plan = [
-      { day: 1, dsa: "Arrays + Sorting Basics", bjarne: "Ch 1: Intro + History", cherno: "Setup + Intro" },
-      { day: 2, dsa: "Sorting + STL Sort", bjarne: "Ch 2: Types + Declarations", cherno: "Variables, Types" },
-      { day: 3, dsa: "Searching", bjarne: "Ch 3: Functions + Pointers", cherno: "Functions, Scope" },
-      { day: 4, dsa: "Recursion + Practice", bjarne: "Ch 4: Namespaces + Const", cherno: "Pointers, References" },
-      { day: 5, dsa: "2D Arrays, Strings", bjarne: "Ch 5: Classes Basics", cherno: "Classes, Constructors" },
-      { day: 6, dsa: "Strings + STL String", bjarne: "Ch 6: Classes Advanced", cherno: "OOP Overview" },
-      { day: 7, dsa: "Bit Manipulation", bjarne: "Ch 7: Operator Overloading", cherno: "Static, Const" },
-      { day: 8, dsa: "Linked List 1", bjarne: "Ch 8: Memory, New/Delete", cherno: "Memory & Heap" },
-      { day: 9, dsa: "Linked List 2", bjarne: "Ch 9: Copy Control", cherno: "The Stack" },
-      { day: 10, dsa: "Stack + Queue", bjarne: "Ch 10: Templates", cherno: "Templates" },
-      { day: 11, dsa: "STL Stack + Queue", bjarne: "Ch 11: STL Basics", cherno: "Vectors" },
-      { day: 12, dsa: "Recap + Practice", bjarne: "Ch 12: STL Containers", cherno: "STL Containers" },
-      { day: 13, dsa: "Trees: Basic", bjarne: "Ch 13: Algorithms STL", cherno: "Sorting, Search STL" },
-      { day: 14, dsa: "Trees: Traversals", bjarne: "Ch 14: Iterators + Lambdas", cherno: "Iterators" },
-      { day: 15, dsa: "Trees: Height, Diameter", bjarne: "Ch 15: Exceptions", cherno: "Error Handling" },
-      { day: 16, dsa: "Binary Search Trees", bjarne: "Ch 16: Smart Pointers", cherno: "Smart Pointers" },
-      { day: 17, dsa: "Heaps + Priority Queue", bjarne: "Ch 17: Advanced Types", cherno: "Enums, Structs" },
-      { day: 18, dsa: "Tries + Hashmaps", bjarne: "Ch 18: Multithreading", cherno: "Cherno Threads" },
-      { day: 19, dsa: "Graphs: DFS + BFS", bjarne: "Ch 19: Concurrency", cherno: "Thread Sync" },
-      { day: 20, dsa: "Graphs: Topo Sort", bjarne: "Ch 20: I/O Streams", cherno: "File I/O" },
-      { day: 21, dsa: "Union-Find + Kruskal", bjarne: "Ch 21: More on Classes", cherno: "Inheritance" },
-      { day: 22, dsa: "Greedy Algorithms", bjarne: "Ch 22: Design Advice", cherno: "OOP Practices" },
-      { day: 23, dsa: "Backtracking", bjarne: "Ch 23: Memory Management", cherno: "Raw vs Smart Pointers" },
-      { day: 24, dsa: "Dynamic Programming 1", bjarne: "Ch 24: Language Support", cherno: "RTTI, Typeid" },
-      { day: 25, dsa: "Dynamic Programming 2", bjarne: "Review Templates + Lambdas", cherno: "Lambda Deep Dive" },
-      { day: 26, dsa: "Sliding Window, 2 Pointers", bjarne: "Practice: Projects", cherno: "Cherno: Make Project" },
-      { day: 27, dsa: "Practice Coding Sheet (Babbar/Striver)", bjarne: "Review Notes", cherno: "Input Systems" },
-      { day: 28, dsa: "Mock Test + Interview Problems", bjarne: "Wrap-Up Book", cherno: "Cherno Final Video" },
-      { day: 29, dsa: "Final DSA Revision", bjarne: "Notes Summary", cherno: "Cherno Project Build" },
-      { day: 30, dsa: "Final Test + Leetcode", bjarne: "Reflection & PDF Notes", cherno: "Optimize + Clean Code" }
-    ];
+<script>
+  const plan = [
+    ["Arrays + Sorting Basics", "Ch 1: Intro + History", "Setup + Intro"],
+    ["Sorting + STL Sort", "Ch 2: Types + Declarations", "Variables, Types"],
+    ["Searching", "Ch 3: Functions + Pointers", "Functions, Scope"],
+    ["Recursion + Practice", "Ch 4: Namespaces + Const", "Pointers, References"],
+    ["2D Arrays, Strings", "Ch 5: Classes Basics", "Classes, Constructors"],
+    ["Strings + STL String", "Ch 6: Classes Advanced", "OOP Overview"],
+    ["Bit Manipulation", "Ch 7: Operator Overloading", "Static, Const"],
+    ["Linked List 1", "Ch 8: Memory, New/Delete", "Memory & Heap"],
+    ["Linked List 2", "Ch 9: Copy Control", "The Stack"],
+    ["Stack + Queue", "Ch 10: Templates", "Templates"],
+    ["STL Stack + Queue", "Ch 11: STL Basics", "Vectors"],
+    ["Recap + Practice", "Ch 12: STL Containers", "STL Containers"],
+    ["Trees: Basic", "Ch 13: Algorithms STL", "Sorting, Search STL"],
+    ["Trees: Traversals", "Ch 14: Iterators + Lambdas", "Iterators"],
+    ["Trees: Height, Diameter", "Ch 15: Exceptions", "Error Handling"],
+    ["Binary Search Trees", "Ch 16: Smart Pointers", "Smart Pointers"],
+    ["Heaps + Priority Queue", "Ch 17: Advanced Types", "Enums, Structs"],
+    ["Tries + Hashmaps", "Ch 18: Multithreading", "Cherno Threads"],
+    ["Graphs: DFS + BFS", "Ch 19: Concurrency", "Thread Sync"],
+    ["Graphs: Topo Sort", "Ch 20: I/O Streams", "File I/O"],
+    ["Union-Find + Kruskal", "Ch 21: More on Classes", "Inheritance"],
+    ["Greedy Algorithms", "Ch 22: Design Advice", "OOP Practices"],
+    ["Backtracking", "Ch 23: Memory Management", "Raw vs Smart Pointers"],
+    ["Dynamic Programming 1", "Ch 24: Language Support", "RTTI, Typeid"],
+    ["Dynamic Programming 2", "Review Templates + Lambdas", "Lambda Deep Dive"],
+    ["Sliding Window, 2 Pointers", "Practice: Projects", "Cherno: Make Project"],
+    ["Practice Coding Sheet (Babbar/Striver)", "Review Notes", "Input Systems"],
+    ["Mock Test + Interview Problems", "Wrap-Up Book", "Cherno Final Video"],
+    ["Final DSA Revision", "Notes Summary", "Cherno Project Build"],
+    ["Final Test + Leetcode", "Reflection & PDF Notes", "Optimize + Clean Code"]
+  ];
 
-    // Show today's reminder based on current day of month (1-30)
-    const today = new Date().getDate();
-    const reminder = plan.find(p => p.day === today);
-    if(reminder) {
-      document.getElementById('today-reminder').style.display = 'block';
-      document.getElementById('day-num').textContent = reminder.day;
-      document.getElementById('dsa').textContent = reminder.dsa;
-      document.getElementById('bjarne').textContent = reminder.bjarne;
-      document.getElementById('cherno').textContent = reminder.cherno;
+  const tbody = document.querySelector("#plan-table tbody");
+
+  function loadTable() {
+    tbody.innerHTML = "";
+    for(let i = 0; i < plan.length; i++) {
+      const day = i + 1;
+      const dsa = plan[i][0];
+      const book = plan[i][1];
+      const cherno = plan[i][2];
+      const checked = localStorage.getItem("day" + day) === "true" ? "checked" : "";
+      tbody.innerHTML += `
+        <tr>
+          <td>${day}</td>
+          <td>${dsa}</td>
+          <td>${book}</td>
+          <td>${cherno}</td>
+          <td><input type="checkbox" id="att${day}" ${checked} onchange="toggleAttendance(${day})" /></td>
+        </tr>`;
     }
+  }
 
-    // Fill the full plan grid
-    const container = document.getElementById('plan-container');
-    plan.forEach(item => {
-      const
+  function toggleAttendance(day) {
+    const cb = document.getElementById("att" + day);
+    localStorage.setItem("day" + day, cb.checked);
+  }
+
+  function clearAttendance() {
+    if(confirm("Clear all attendance records?")) {
+      for(let i=1; i<=plan.length; i++) {
+        localStorage.removeItem("day" + i);
+      }
+      loadTable();
+    }
+  }
+
+  function checkPending() {
+    let pendingDays = [];
+    for(let i=1; i<=plan.length; i++) {
+      if(localStorage.getItem("day" + i) !== "true") {
+        pendingDays.push(i);
+      }
+    }
+    if(pendingDays.length > 0) {
+      alert(`You have ${pendingDays.length} days pending attendance. Keep going!`);
+    } else {
+      alert("Great job! You have completed all days' attendance.");
+    }
+  }
+
+  loadTable();
+  window.onload = checkPending;
+</script>
+
+</body>
+</html>
